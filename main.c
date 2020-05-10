@@ -3,9 +3,7 @@
 #include <systemd/sd-bus-vtable.h>
 #include <systemd/sd-bus.h>
 
-static const char SERVICE_NAME[] = "org.freedesktop.Notifications";
-static const char OBJECT_PATH[] = "/org/freedesktop/Notifications";
-static const char *INTERFACE = SERVICE_NAME;
+#include "src/freedesktop_notification.h"
 
 static const size_t caps_size = 10;
 static const char *capabilities[]
@@ -62,8 +60,9 @@ main (int argc, char **argv)
       return status;
     }
 
-  if ((status = sd_bus_add_object_vtable (bus, &bus_slot, OBJECT_PATH,
-                                          INTERFACE, VTABLE, NULL))
+  if ((status
+       = sd_bus_add_object_vtable (bus, &bus_slot, notification_object,
+                                   notification_interface, VTABLE, NULL))
       < 0)
     {
       fprintf (stderr, "Could not register object vtable: %s",
@@ -71,10 +70,10 @@ main (int argc, char **argv)
       return status;
     }
 
-  if ((status = sd_bus_request_name (bus, SERVICE_NAME, 0)) < 0)
+  if ((status = sd_bus_request_name (bus, notification_service, 0)) < 0)
     {
-      fprintf (stderr, "Could not request service %s: %s\n", SERVICE_NAME,
-               strerror (-status));
+      fprintf (stderr, "Could not request service %s: %s\n",
+               notification_service, strerror (-status));
       return status;
     }
 

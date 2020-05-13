@@ -7,8 +7,8 @@
    Freedesktop Notification Specification */
 
 /* This message returns the optional capabilities implemented by the server */
-int handle_get_capabilities (sd_bus_message *request, void *data,
-                             sd_bus_error *error);
+const int handle_get_capabilities (sd_bus_message *request, void *data,
+                                   sd_bus_error *error);
 
 /* Sends a notification to the notification server. */
 int handle_notify (sd_bus_message *request, void *data, sd_bus_error *error);

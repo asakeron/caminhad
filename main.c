@@ -4,46 +4,11 @@
 #include <systemd/sd-bus.h>
 
 #include "src/freedesktop_notification.h"
-
-static const size_t caps_size = 10;
-static const char *capabilities[]
-    = { "action-icons", "actions",     "body",       "body-hyperlinks",
-        "body-images",  "body-markup", "icon-multi", "icon-static",
-        "persistence",  "sound" };
-
-static int
-get_capabilities (sd_bus_message *request, void *data, sd_bus_error *error)
-{
-  int status = 0;
-  __attribute__ ((cleanup (sd_bus_message_unrefp))) sd_bus_message *response
-      = NULL;
-
-  if ((status = sd_bus_message_new_method_return (request, &response)) < 0
-      || (status = sd_bus_message_open_container (response, 'a', "s")) < 0)
-    {
-      fprintf (stderr, "Could not create response: %s", strerror (-status));
-      return status;
-    }
-
-  for (size_t i = 0; i < caps_size; ++i)
-    {
-      sd_bus_message_append (response, "s", capabilities[i]);
-    }
-
-  if ((status = sd_bus_message_close_container (response)) < 0)
-    {
-      fprintf (stderr, "Error closing container: %s", strerror (-status));
-      return status;
-    }
-
-  sd_bus_send (NULL, response, NULL);
-
-  return status;
-}
+#include "src/freedesktop_notification_messages.h"
 
 static const sd_bus_vtable VTABLE[]
     = { SD_BUS_VTABLE_START (0),
-        SD_BUS_METHOD ("GetCapabilities", "", "as", get_capabilities,
+        SD_BUS_METHOD ("GetCapabilities", "", "as", handle_get_capabilities,
                        SD_BUS_VTABLE_UNPRIVILEGED),
         SD_BUS_VTABLE_END };
 

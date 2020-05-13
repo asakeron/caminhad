@@ -7,13 +7,13 @@
 
 /* A conforming implementation should take the org.freedesktop.Notifications
    service on the session bus. */
-#define notification_service "org.freedesktop.Notifications"
+const char *notification_service = "org.freedesktop.Notifications";
 
 /* The server should implement the org.freedesktop.Notifications interface. */
-#define notification_interface "org.freedesktop.Notifications"
+const char *notification_interface = "org.freedesktop.Notifications";
 
 /* [...] on an object with the path "/org/freedesktop/Notifications". */
-#define notification_object "/org/freedesktop/Notifications"
+const char *notification_object = "/org/freedesktop/Notifications";
 
 /* Type representing a freedesktop notification. */
 struct freedesktop_notification

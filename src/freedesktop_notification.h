@@ -1,5 +1,5 @@
-#ifndef freedesktop_notification_h
-#define freedesktop_notification_h
+#ifndef FREEDESKTOP_NOTIFICATION_H
+#define FREEDESKTOP_NOTIFICATION_H
 
 /* Declaration of the Freedesktop Notification Specification
   The document used as reference is availiable in
@@ -7,13 +7,13 @@
 
 /* A conforming implementation should take the org.freedesktop.Notifications
    service on the session bus. */
-const char *notification_service = "org.freedesktop.Notifications";
+extern const char *notification_service;
 
 /* The server should implement the org.freedesktop.Notifications interface. */
-const char *notification_interface = "org.freedesktop.Notifications";
+extern const char *notification_interface;
 
 /* [...] on an object with the path "/org/freedesktop/Notifications". */
-const char *notification_object = "/org/freedesktop/Notifications";
+extern const char *notification_object;
 
 /* Type representing a freedesktop notification. */
 struct freedesktop_notification
@@ -43,4 +43,5 @@ struct freedesktop_notification
   int expiration_timeout;
 };
 
-#endif /* not freedesktop_notification_h */
+#endif /* not FREEDESKTOP_NOTIFICATION_H */
+

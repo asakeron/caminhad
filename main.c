@@ -10,6 +10,9 @@ static const sd_bus_vtable VTABLE[]
     = { SD_BUS_VTABLE_START (0),
         SD_BUS_METHOD ("GetCapabilities", "", "as", handle_get_capabilities,
                        SD_BUS_VTABLE_UNPRIVILEGED),
+        SD_BUS_METHOD ("GetServerInformation", "", "ssss",
+                       handle_get_server_information,
+                       SD_BUS_VTABLE_UNPRIVILEGED),
         SD_BUS_VTABLE_END };
 
 int

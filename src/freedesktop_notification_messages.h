@@ -1,5 +1,5 @@
-#ifndef freedesktop_notification_messages_h
-#define freedesktop_notification_messages_h
+#ifndef FREEDESKTOP_NOTIFICATION_MESSAGES_H
+#define FREEDESKTOP_NOTIFICATION_MESSAGES_H
 
 #include <systemd/sd-bus.h>
 
@@ -7,8 +7,8 @@
    Freedesktop Notification Specification */
 
 /* This message returns the optional capabilities implemented by the server */
-const int handle_get_capabilities (sd_bus_message *request, void *data,
-                                   sd_bus_error *error);
+int handle_get_capabilities (sd_bus_message *request, void *data,
+                             sd_bus_error *error);
 
 /* Sends a notification to the notification server. */
 int handle_notify (sd_bus_message *request, void *data, sd_bus_error *error);
@@ -23,4 +23,4 @@ int handle_close_notification (sd_bus_message *request, void *data,
 int handle_get_server_information (sd_bus_message *request, void *data,
                                    sd_bus_error *error);
 
-#endif /* freedesktop_notification_messages_h */
+#endif /* not FREEDESKTOP_NOTIFICATION_MESSAGES_H */
